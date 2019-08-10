@@ -21,11 +21,9 @@ public class CategoriaResources {
 	private CategoriaService service;
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
-	public ResponseEntity<?> fing(@PathVariable Integer id) {
+	public ResponseEntity<?> fing(@PathVariable Integer id) throws Exception {
 		Categoria obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
-		
-		
+			
 	}
-
 }
