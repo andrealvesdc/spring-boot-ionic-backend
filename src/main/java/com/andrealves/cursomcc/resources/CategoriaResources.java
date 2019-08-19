@@ -1,7 +1,6 @@
 package com.andrealves.cursomcc.resources;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.andrealves.cursomcc.domain.Categoria;
 import com.andrealves.cursomcc.services.CategoriaService;
 
-@SuppressWarnings("unused")
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResources {
@@ -24,8 +22,8 @@ public class CategoriaResources {
 	private CategoriaService service;
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
-	public ResponseEntity<?> fing(@PathVariable Integer id) throws Exception {
-		Categoria obj = service.buscar(id);
+	public ResponseEntity<Categoria> fing(@PathVariable Integer id) throws Exception {
+		Categoria obj = service.fing(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -35,5 +33,12 @@ public class CategoriaResources {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) throws Exception{
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 }
