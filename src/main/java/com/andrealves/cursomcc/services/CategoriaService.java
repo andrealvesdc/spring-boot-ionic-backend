@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.andrealves.cursomcc.domain.Categoria;
+import com.andrealves.cursomcc.domain.Cliente;
 import com.andrealves.cursomcc.dto.CategoriaDTO;
 import com.andrealves.cursomcc.repositories.CategoriaRepository;
 import com.andrealves.cursomcc.services.exception.DataIntegrityException;
@@ -34,8 +35,9 @@ public class CategoriaService {
 	}
 	
 	public Categoria update(Categoria obj) throws Exception {
-		fing(obj.getId());
-		return repo.save(obj);
+		Categoria newObj = fing(obj.getId());
+		updateDate(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	
@@ -60,6 +62,10 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO objDto) {
 		return new Categoria(objDto.getId(), objDto.getNome());
+	}
+	
+	private void updateDate(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
 	}
 
 }
