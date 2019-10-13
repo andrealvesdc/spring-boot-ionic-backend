@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.andrealves.cursomcc.domain.Categoria;
-import com.andrealves.cursomcc.domain.Cliente;
 import com.andrealves.cursomcc.dto.CategoriaDTO;
 import com.andrealves.cursomcc.repositories.CategoriaRepository;
 import com.andrealves.cursomcc.services.exception.DataIntegrityException;
